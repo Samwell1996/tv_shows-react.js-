@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{ useState } from 'react';
 import './App.css';
+import PopularTV from "./pages/PopularTV/PopularTV";
+import RatedTV from "./pages/RatedTV/RatedTV";
+
+const routes = {
+    PopularTV:PopularTV,
+    RatedTV:RatedTV,
+};
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    const [currentRoute, setCurrentRoute] = useState(`PopularTV`);
+
+    function onGoTo(route) {
+        setCurrentRoute(route)
+    }
+
+  const Component = routes[currentRoute];
+
+
+    return (
+    <div>
+
+         <Component onGoTo={onGoTo}/>
+
     </div>
   );
 }
