@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
-import '../../App.css'
-import {useFetch} from '../../hooks'
-import {Loader, Button, Paginator} from '../../components'
-import {getApiUrl} from '../../utils'
+import React, {useState} from 'react';
+import '../../App.css';
+import {useFetch, usePaginator} from '../../hooks';
+import {Loader, Button, Paginator} from '../../components';
+import {getApiUrl} from '../../utils';
 
 function RatedTV({onGoTo}) {
 
@@ -11,36 +11,32 @@ function RatedTV({onGoTo}) {
         getApiUrl(`top_rated`, page),
         page
     );
-
+    const [onGetNext, onGetPrev] = usePaginator(
+        page,
+        setPage,
+        data
+    );
     function onGoToPopularTV(event) {
         event.preventDefault();
         onGoTo(`PopularTV`);
 
     }
-    function onGetNext() {
-        let newPage = page + 1;
-        if( page < data.total_pages ) {
-            setPage(newPage);
-        }
-    }
-    function onGetPrev() {
-        let newPage = page - 1;
-        if( page > 1) {
-            setPage(newPage);
-        }
+    function onGoToDetails(event, id) {
+        event.preventDefault();
+        onGoTo(`ElementDetails`, {id});
 
     }
+
     return (
         <div className='ShowTV'>
-            <div >
-                {loading ? (
+            {loading ? (
                     <Loader/>
                 ) : (
                     <div>
                         <h1>Rated TV</h1>
                         <ul>
-                            {data.results.map(({original_name}) => (
-                                <li>
+                            {data.results.map(({original_name, id}) => (
+                                <li key={id} onClick={(e)=>onGoToDetails(e, id)}>
                                     {original_name}
                                 </li>
 
@@ -51,8 +47,6 @@ function RatedTV({onGoTo}) {
                     </div>
 
                 )}
-            </div>
-
         </div>
     )
 }

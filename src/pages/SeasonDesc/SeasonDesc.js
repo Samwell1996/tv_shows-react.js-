@@ -1,18 +1,23 @@
-import React from 'react'
-import Loader from '../../components/Loader/Loader'
-import '../../App.css'
-import {useFetch} from '../../hooks/useFetch'
+import React, {useState} from 'react';
+import '../../App.css';
+import {useFetch} from '../../hooks';
+import {Loader} from '../../components';
+import {getApiSeason} from "../../utils";
+import ButtonBack from '../../components/Button/ButtonBack'
 
-function getApiUrl(id) {
-    return `https://api.themoviedb.org/3/tv/${id}?api_key=3eea6bcfa2450c59826506df72dab025&language=en-US`;
-}
-
-
-function SeasonDesc() {
-
+function SeasonDesc({params, onGoTo}) {
+    const [page] = useState(1);
     const [data, loading] = useFetch(
-        getApiUrl(`tv_id`)
+        getApiSeason(params.id, params.season_number),
+        page
     );
+    const src = `https://image.tmdb.org/t/p/w300${data.poster_path}`;
+
+    function onGoToEpisodeDesc(event, episode_number) {
+        event.preventDefault();
+        onGoTo(`EpisodeDesc`, {id:params.id, season_number:params.season_number, episode_number});
+
+    }
 
     return (
         <div className='ShowTV'>
@@ -21,9 +26,36 @@ function SeasonDesc() {
                     <Loader/>
                 ) : (
                     <div>
-                        desc
+                    <div className="contentElement">
+                        <h1>{data.name}</h1>
+                        <div className='topElement'>
+                            <span>
+                                <img src={src} alt="Poster"/>
+                            </span>
+                            <div className="description">
+                                {data.overview}
+                            </div>
+                        </div>
+                        <div className="manySS">
+                                <span>
+                                   Season: {data.season_number}
+                                </span>
+                            <span>
+                                    Episodes: {data.episodes.length}
+                                </span>
+                        </div>
+                        <ul className="ulElementSeason">
+                            {data.episodes.map(({name, id, episode_number}) => (
+                                <li className="liElement" key={id} onClick={(e)=>onGoToEpisodeDesc(e, episode_number)}>
+                                    {name}
+                                </li>
+
+                            ))}
+                        </ul>
+                        <ButtonBack/>
                     </div>
 
+                    </div>
                 )}
             </div>
         </div>
