@@ -5,11 +5,11 @@ function Paginator({onClickPrev, onClickNext, page, total_pages}) {
 
     return (
         <div>
-            <button className='onButton' onClick={onClickPrev} > Prev</button>
+            <button className={page <= 1 ? 'red' : 'onButton'} onClick={onClickPrev} > Prev</button>
             <span>
                 {page} / {total_pages}
             </span>
-            <button className='onButton' onClick={onClickNext} > Next</button>
+            <button className={total_pages <= page ? 'red' : 'onButton'} onClick={onClickNext} > Next</button>
         </div>
     )
 }

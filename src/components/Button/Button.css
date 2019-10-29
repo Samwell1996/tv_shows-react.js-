@@ -22,6 +22,29 @@
   cursor: pointer;
 }
 
+.red {
+  text-decoration: none;
+  text-align: center;
+  padding: 11px 40px;
+  border-radius: 4px;
+  font: 17px Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #ffeffe;
+  background-color: #000000;
+  box-shadow: 0 0 2px #7b7b7b, inset 0 0 1px #717178;
+  text-shadow: 0px -1px 0px #a8a8a8;
+  transition: all 0.35s ease;
+  margin: 0 auto;
+  border: 1px solid;
+}
+.red:hover {
+  background: #ff725e;
+  box-shadow: 0 2px 0 0 #b1b1b1;
+  color: #08342b;
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
 .onButtonChange {
   text-decoration: none;
   text-align: center;
@@ -40,13 +63,6 @@
 }
 .onButtonChange:hover {
   background: #d5e9d5;
-  box-shadow: 0 2px 0 0 #b1b1b1;
-  color: #08342b;
-  transition: all 0.35s ease;
-  cursor: pointer;
-}
-.onButtonChange .red {
-  background: #ff725e;
   box-shadow: 0 2px 0 0 #b1b1b1;
   color: #08342b;
   transition: all 0.35s ease;

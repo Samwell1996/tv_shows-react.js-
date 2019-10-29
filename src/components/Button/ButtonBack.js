@@ -1,10 +1,10 @@
 import React from 'react'
 import './Button.css'
 
-function ButtonBack() {
+function ButtonBack({onClick}) {
     return (
         <div>
-            <button className='onButton' >Back</button>
+            <button className='onButton' onClick={onClick} >Back</button>
         </div>
     )
 }

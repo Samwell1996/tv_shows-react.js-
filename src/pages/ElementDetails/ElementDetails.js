@@ -3,7 +3,7 @@ import '../../App.css';
 import {useFetch} from '../../hooks';
 import {Loader} from '../../components';
 import {getApiDetails} from "../../utils";
-import ButtonBack from '../../components/Button/ButtonBack'
+import ButtonStart from '../../components/Button/ButtonStart'
 
 function ElementDetails({params, onGoTo}) {
     const [page] = useState(1);
@@ -17,6 +17,14 @@ function ElementDetails({params, onGoTo}) {
         event.preventDefault();
         onGoTo(`SeasonDesc`, {id:params.id, season_number});
 
+    }
+    function getStartPopular(event) {
+        event.preventDefault();
+        onGoTo(`PopularTV`);
+    }
+    function getStartRated(event) {
+        event.preventDefault();
+        onGoTo(`RatedTV`);
     }
 
     return (
@@ -51,7 +59,7 @@ function ElementDetails({params, onGoTo}) {
 
                             ))}
                         </ul>
-                        <ButtonBack/>
+                        <ButtonStart onClickPopular={getStartPopular} onClickRated={getStartRated}/>
                     </div>
                 )}
             </div>

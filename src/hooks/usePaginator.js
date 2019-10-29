@@ -1,8 +1,6 @@
-// import '../components/Button/Button.css'
-
 const usePaginator = (page, setPage, data) =>
 {
-    // const onButtonChange = ['onButtonChange'];
+
 
     function onGetNext () {
         let newPage = page + 1;
@@ -16,9 +14,6 @@ const usePaginator = (page, setPage, data) =>
 
             setPage(newPage);
         }
-        // if(newPage == 0) {
-        //     onButtonChange.push('red')
-        // }
     }
     return [onGetNext, onGetPrev];
 

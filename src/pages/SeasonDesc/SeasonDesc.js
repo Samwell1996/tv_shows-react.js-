@@ -18,6 +18,11 @@ function SeasonDesc({params, onGoTo}) {
         onGoTo(`EpisodeDesc`, {id:params.id, season_number:params.season_number, episode_number});
 
     }
+    function getBackToStart(event,season_number) {
+        event.preventDefault();
+        onGoTo(`ElementDetails`, {id:params.id, season_number});
+    }
+
 
     return (
         <div className='ShowTV'>
@@ -52,7 +57,7 @@ function SeasonDesc({params, onGoTo}) {
 
                             ))}
                         </ul>
-                        <ButtonBack/>
+                        <ButtonBack onClick={getBackToStart}/>
                     </div>
 
                     </div>

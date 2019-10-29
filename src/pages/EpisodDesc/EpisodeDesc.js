@@ -6,14 +6,19 @@ import {getApiEpisode} from "../../utils";
 import ButtonBack from "../../components/Button/ButtonBack";
 
 
-function EpisodeDesc({params}) {
+function EpisodeDesc({params, onGoTo}) {
     const [page] = useState(1);
     const [data, loading] = useFetch(
         getApiEpisode(params.id, params.season_number, params.episode_number),
         page
     );
     const src = `https://image.tmdb.org/t/p/w300${data.still_path}`;
-    console.log(data)
+
+    function getBackToStart(event, episode_number) {
+        event.preventDefault();
+        onGoTo(`SeasonDesc`, {id:params.id, season_number:params.season_number, episode_number});
+    }
+
     return (
         <div className='ShowTV'>
             <div >
@@ -39,7 +44,7 @@ function EpisodeDesc({params}) {
                                     Episodes: {data.episode_number}
                                 </span>
                             </div>
-                            <ButtonBack/>
+                            <ButtonBack onClick={getBackToStart}/>
                         </div>
 
                     </div>
